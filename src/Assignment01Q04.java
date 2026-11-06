@@ -3,8 +3,40 @@ import java.util.Arrays;
 public class Assignment01Q04 {
 
     public static int[] shiftArrayCyclic(int[] array, int move, char direction) {
-        // TODO: implement
+        move = convert_to_positive_right(move, direction, array.length); //convert the moves to a positive number of moves to the right
+        if (move == 0) {
+            return array;
+        }
+
+        int previous_value;
+        int current_value = array[0];
+        int index = 0;
+        for (int i = 0; i < array.length; i++) { //in place shift the array by moving each element to the right by "move" positions
+            previous_value = current_value ;
+            index = (index + move) % array.length;
+            current_value = array[index];
+            array[index] = previous_value;
+
+        }
+
+            
         return array;
+    }
+
+    private static int convert_to_positive_right(int move, char direction, int array_length) {
+        if (move == 0 || array_length == 0) {
+            return 0;
+        }
+        if (direction == 'L') {
+            move = -move;
+        } else if (direction != 'R') {
+            return 0;
+        }
+        move = move % array_length;
+        if (move < 0) {
+            move += array_length;
+        }
+        return move;
     }
 
     public static void main(String[] args) {
