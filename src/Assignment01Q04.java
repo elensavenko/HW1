@@ -8,18 +8,15 @@ public class Assignment01Q04 {
             return array;
         }
 
-        int previous_value;
-        int current_value = array[0];
-        int index = 0;
-        for (int i = 0; i < array.length; i++) { //in place shift the array by moving each element to the right by "move" positions
-            previous_value = current_value ;
-            index = (index + move) % array.length;
-            current_value = array[index];
-            array[index] = previous_value;
-
+        int tmp_array[] = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            tmp_array[(i + move) % array.length] = array[i]; //insert the elenments of the originial array shifted to the right by 'move'
         }
 
-            
+        for (int i = 0; i < array.length; i++) {
+            array[i] = tmp_array[i]; //copy the elements of the temporary array back to the original array
+        }
+
         return array;
     }
 
